@@ -1,0 +1,171 @@
+const path = require('path')
+const webpack = require('webpack')
+const resolve = dir => {
+  return path.join(__dirname, dir)
+}
+
+// 项目部署基础
+// 默认情况下，我们假设你的应用将被部署在域的根目录下,
+// 例如：https://www.my-app.com/
+// 默认：'/'
+// 如果您的应用程序部署在子路径中，则需要在这指定子路径
+// 例如：https://www.foobar.com/my-app/
+// 需要将它改为'/my-app/'
+const BASE_URL = process.env.NODE_ENV === 'production'
+  ? '/'
+  : '/'
+
+module.exports = {
+  // Project deployment base
+  // By default we assume your app will be deployed at the root of a domain,
+  // e.g. https://www.my-app.com/
+  // If your app is deployed at a sub-path, you will need to specify that
+  // sub-path here. For example, if your app is deployed at
+  // https://www.foobar.com/my-app/
+  // then change this to '/my-app/'
+  publicPath: BASE_URL,
+  // tweak internal webpack configuration.
+  // see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
+  // 如果你不需要使用eslint，把lintOnSave设为false即可
+  lintOnSave: false,
+  chainWebpack: config => {
+    config.resolve.alias
+      .set('@', resolve('src')) // key,value自行定义，比如.set('@@', resolve('src/components'))
+      .set('_c', resolve('src/components'))
+  },
+  // 打包时不生成.map文件
+  productionSourceMap: false,
+  // 这里写你调用接口的基础路径，来解决跨域，如果设置了代理，那你本地开发环境的axios的baseUrl要写为 '' ，即空字符串
+  devServer: {
+    proxy:
+    {
+      '^/platform/sys': { // platform后台框架 接口代理
+        target: 'http://dhr500.gomeuat.com.cn',
+        // changeOrigin: true,
+        // ws: true,
+        pathRewrite: {
+          '^/platform/sys': '/platform/sys'
+        }
+      },
+      '^/platform/employee': { // platform后台框架 接口代理
+        target: 'http://dhr500.gomeuat.com.cn',
+        // changeOrigin: true,
+        // ws: true,
+        pathRewrite: {
+          '^/platform/employee': '/platform/employee'
+        }
+      },
+      '/uploadFdfs': {
+        target: 'http://api.scloud.gome.inc',
+        changeOrigin: true,
+        pathRewrite: {
+          '/uploadFdfs': '/uploadFdfs'
+        }
+      },
+      '/calendar': {
+        target: 'http://dhr500.gomeuat.com.cn',
+        changeOrigin: true,
+        ws: true,
+        pathRewrite: {
+          '/calendar': '/calendar'
+        }
+      },
+      '/vacation': {
+        target: 'http://dhr500.gomeuat.com.cn',
+        changeOrigin: true,
+        ws: true,
+        pathRewrite: {
+          '/vacation': '/vacation'
+        }
+      },
+      '/attendance': {
+        target: 'http://dhr500.gomeuat.com.cn',
+        changeOrigin: true,
+        ws: true,
+        pathRewrite: {
+          '/attendance': '/attendance'
+        }
+      },
+      '/holidayRule': {
+        target: 'http://dhr500.gomeuat.com.cn',
+        changeOrigin: true,
+        ws: true,
+        pathRewrite: {
+          '/holidayRule': '/holidayRule'
+        }
+      },
+      '^/platform/management': {
+        target: 'http://dhr500.gomeuat.com.cn/',
+        changeOrigin: true,
+        ws: true,
+        pathRewrite: {
+          '^/platform/management': '/platform/management'
+        }
+      },
+      '^/kq/worktime': {
+        target: 'http://dhr500.gomeuat.com.cn/',
+        changeOrigin: true,
+        ws: true,
+        pathRewrite: {
+          '^/kq/worktime': '/kq/worktime'
+        }
+      },
+      '/rule': {
+        target: 'http://dhr500.gomeuat.com.cn',
+        changeOrigin: true,
+        ws: true,
+        pathRewrite: {
+          '/rule': '/rule'
+        }
+      },
+      '/archive': {
+        target: 'http://dhr500.gomeuat.com.cn',
+        changeOrigin: true,
+        ws: true
+      },
+      '/kq': {
+        target: 'http://dhr500.gomeuat.com.cn',
+        changeOrigin: true,
+        ws: true
+      },
+      '/bill': {
+        target: 'http://dhr500.gomeuat.com.cn',
+        changeOrigin: true,
+        ws: true
+      },
+      '/worktime': {
+        target: 'http://dhr500.gomeuat.com.cn',
+        changeOrigin: true,
+        ws: true
+      },
+      '/contract': {
+        target: 'http://dhr500.gomeuat.com.cn',
+        changeOrigin: true,
+        ws: true
+      },
+      '^/platform/login': { // platform后台框架 接口代理
+        target: 'http://dhr500.gomeuat.com.cn',
+        // changeOrigin: true,
+        // ws: true,
+        pathRewrite: {
+          '^/platform/login': '/platform/login'
+        }
+      },
+    }
+  },
+  assetsDir: 'static',
+  css: {
+    loaderOptions: {
+      less: {
+        lessOptions: {
+          modifyVars: {
+            'primary-color': '#1890ff',
+            'link-color': '#1890ff',
+            'font-size-base': '12px',
+          },
+          javascriptEnabled: true,
+        },
+      }
+    }
+  }
+}

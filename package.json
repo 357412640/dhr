@@ -1,0 +1,76 @@
+{
+  "name": "",
+  "version": "2.0.0",
+  "author": "",
+  "private": false,
+  "scripts": {
+    "dev": "vue-cli-service serve --open",
+    "build.pro": "vue-cli-service build --mode prod",
+    "build.dev": "vue-cli-service build --mode dev",
+    "build.test": "vue-cli-service build --mode test",
+    "lint": "vue-cli-service lint",
+    "lintfix": "eslint --fix --ext .js,.vue src",
+    "test:unit": "vue-cli-service test:unit",
+    "test:e2e": "vue-cli-service test:e2e"
+  },
+  "dependencies": {
+    "ant-design-vue": "^1.7.1",
+    "axios": "^0.18.0",
+    "browser-md5-file": "^1.1.1",
+    "clipboard": "^2.0.0",
+    "codemirror": "^5.38.0",
+    "countup": "^1.8.2",
+    "cropperjs": "^1.2.2",
+    "dayjs": "^1.7.7",
+    "echarts": "^4.0.4",
+    "html-entities": "^1.3.1",
+    "html2canvas": "^1.0.0-alpha.12",
+    "iview": "3.4.0",
+    "iview-area": "^1.5.17",
+    "js-cookie": "^2.2.0",
+    "lodash": "^4.17.20",
+    "qrcodejs2": "0.0.2",
+    "simplemde": "^1.11.2",
+    "sortablejs": "^1.7.0",
+    "velocity-animate": "^1.5.2",
+    "vue": "^2.5.10",
+    "vue-i18n": "^7.8.0",
+    "vue-router": "^3.0.1",
+    "vuedraggable": "^2.16.0",
+    "vuex": "^3.0.1",
+    "wangeditor": "^3.1.1",
+    "xlsx": "^0.13.3"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.12.1",
+    "@vue/cli-plugin-babel": "^3.6.0",
+    "@vue/cli-plugin-eslint": "^3.6.0",
+    "@vue/cli-plugin-unit-mocha": "^3.6.0",
+    "@vue/cli-service": "^3.6.0",
+    "@vue/eslint-config-standard": "^3.0.0-beta.10",
+    "@vue/test-utils": "^1.0.0-beta.10",
+    "babel-plugin-import": "^1.13.1",
+    "chai": "^4.1.2",
+    "eslint-plugin-cypress": "^2.0.1",
+    "less": "^2.7.3",
+    "less-loader": "^7.0.2",
+    "lint-staged": "^6.0.0",
+    "mockjs": "^1.0.1-beta3",
+    "vue-template-compiler": "^2.5.13"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "lint-staged": {
+    "*.js": [
+      "lintfix",
+      "git add"
+    ],
+    "*.vue": [
+      "lintfix",
+      "git add"
+    ]
+  }
+}
